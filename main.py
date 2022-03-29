@@ -43,12 +43,15 @@ def get_comment_decode(comments_list):
 def get_sessions():
     if os.path.exists('session.pickle'):
         with open('session.pickle', 'r') as f:
-            session = pickle.load(f)
+            s = pickle.load(f)
     else:
-        session = login_session()
+        s = login_session()
+
+    return s
 
 
-def main(s, pid):
+def main(pid):
+    s = get_sessions()
     comments_list = get_comments_list(pid)
     like(pid)
     comment_decode = get_comment_decode(comments_list)
