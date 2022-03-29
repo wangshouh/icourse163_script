@@ -23,7 +23,7 @@ def like(s, pid):
     print(resp.text)
 
 
-def send_comment(pid, comment):
+def send_comment(s, pid, comment):
     url = "https://www.icourse163.org/dwr/call/plaincall/MocForumBean.addReply.dwr"
     headers = {
         'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:98.0) Gecko/20100101 Firefox/98.0'
@@ -57,6 +57,6 @@ def main():
         comments_list = get_comments_list(s, pid)
         like(s, pid)
         comment_decode = get_comment_decode(comments_list)
-        send_comment(pid, comment_decode)
+        send_comment(s, pid, comment_decode)
     
 main()
