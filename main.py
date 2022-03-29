@@ -19,3 +19,8 @@ def send_comment(pid, comment):
     resp = s.post(url, data=data)
 
     print(resp.status_code)
+
+def get_comment_decode(comments_list):
+    comment = random.choice(comments_list)
+    comment_decode = urllib.parse.quote(comment)
+    return comment_decode
