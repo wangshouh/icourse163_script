@@ -11,3 +11,11 @@ def like(s, pid):
     resp = s.post(url, data=data)
 
     print(resp.text)
+
+def send_comment(pid, comment):
+    url = "https://www.icourse163.org/dwr/call/plaincall/MocForumBean.addReply.dwr"
+
+    data = f"callCount=1\nscriptSessionId=$scriptSessionId190\nc0-scriptName=MocForumBean\nc0-methodName=addReply\nc0-id=0\nc0-e1=number:{pid}\nc0-e2=string:{comment}\nc0-e3=number:0\nc0-param0=Object_Object:{{postId:reference:c0-e1,content:reference:c0-e2,anonymous:reference:c0-e3}}\nc0-param1=Array:[]\nbatchId=1648444077749"
+    resp = s.post(url, data=data)
+
+    print(resp.status_code)
