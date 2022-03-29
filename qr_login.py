@@ -101,3 +101,17 @@ def get_cookie(s, cookie_url_list):
 
         response = s.get(url, headers=headers)
         print(response.text)
+
+def login_session():
+    s = requests.Session()
+    qr_info = get_qr_info(s)
+    print(qr_info)
+    qr_url = qr_info['codeUrl']
+    pollkey = qr_info['pollKey']
+    get_qr_img(qr_url)
+    login_token = scan_qr_code(s, pollkey)
+    cookie_text = get_cookie_text(s, login_token)
+    cookie_url_list = get_cookie_url(cookie_text)
+    get_cookie(s, cookie_url_list)
+
+    return s
