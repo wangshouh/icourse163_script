@@ -16,3 +16,17 @@ def get_qr_info(s):
 
     response_json = json.loads(response.text)
     return response_json['result']
+
+def get_qr_img(qr_url):
+    url = qr_url
+
+    payload = {}
+    headers = {
+        'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:98.0) Gecko/20100101 Firefox/98.0'
+    }
+
+    with open('qr.png', 'wb') as f:
+        response = requests.request("GET", url, headers=headers, data=payload)
+        img_data = response.content
+        f.write(img_data)
+
