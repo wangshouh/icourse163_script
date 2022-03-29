@@ -1,9 +1,15 @@
-import requests
 import json
-from requests.structures import CaseInsensitiveDict
-import urllib.parse
+import os
+import pickle
 import random
+import urllib.parse
+
+import requests
+from requests.structures import CaseInsensitiveDict
+
 from comment import get_comments_list
+from qr_login import login_session
+
 
 def like(s, pid):
     url = "https://www.icourse163.org/dwr/call/plaincall/MocForumBean.markVote.dwr"
@@ -16,6 +22,7 @@ def like(s, pid):
 
     print(resp.text)
 
+
 def send_comment(pid, comment):
     url = "https://www.icourse163.org/dwr/call/plaincall/MocForumBean.addReply.dwr"
     headers = {
@@ -26,10 +33,12 @@ def send_comment(pid, comment):
 
     print(resp.status_code)
 
+
 def get_comment_decode(comments_list):
     comment = random.choice(comments_list)
     comment_decode = urllib.parse.quote(comment)
     return comment_decode
+
 
 def main(s, pid):
     comments_list = get_comments_list(pid)
