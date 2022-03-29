@@ -2,6 +2,8 @@ import requests
 import json
 from requests.structures import CaseInsensitiveDict
 import urllib.parse
+import random
+from comment import get_comments_list
 
 def like(s, pid):
     url = "https://www.icourse163.org/dwr/call/plaincall/MocForumBean.markVote.dwr"
