@@ -50,7 +50,7 @@ def get_sessions():
     return s
 
 
-def main(pid):
+def main():
     s = get_sessions()
     while True:
         pid = input('输入pid:')
@@ -58,3 +58,5 @@ def main(pid):
         like(s, pid)
         comment_decode = get_comment_decode(comments_list)
         send_comment(pid, comment_decode)
+    
+main()
