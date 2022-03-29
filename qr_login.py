@@ -121,3 +121,5 @@ def login_session():
     cookie_url_list = get_cookie_url(cookie_text)
     get_cookie(s, cookie_url_list)
     save_session(s)
+
+    return s
