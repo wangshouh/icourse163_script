@@ -45,3 +45,25 @@ def get_qr_result(s, pollkey):
     response_json = json.loads(response.text)
 
     return response_json['result']
+
+
+def scan_qr_code(s, pollkey):
+    while True:
+        time.sleep(1)
+        result = get_qr_result(s, pollkey)
+        if result['codeStatus'] == 0:
+            print('请使用手机扫描qr.png登录')
+            print(result)
+        elif result['codeStatus'] == 1:
+            print('请在手机上确认登录')
+            print(result)
+        elif result['codeStatus'] == 2:
+            login_token = result['token']
+            print('登录成功')
+            print(result)
+            break
+        else:
+            print("二维码过期")
+            print(result)
+
+    return login_token
