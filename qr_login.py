@@ -85,3 +85,19 @@ def get_cookie_text(s, login_token):
     return response.text
 
 
+def get_cookie_url(cookie_text):
+    cookie_url_list = re.findall(r'href="(.*?)"', cookie_text)
+
+    return cookie_url_list
+
+
+def get_cookie(s, cookie_url_list):
+    for cookie_url in cookie_url_list:
+        url = cookie_url
+
+        headers = {
+            'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:98.0) Gecko/20100101 Firefox/98.0',
+        }
+
+        response = s.get(url, headers=headers)
+        print(response.text)
