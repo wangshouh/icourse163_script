@@ -2,6 +2,7 @@ import requests
 import json
 import time
 import re
+import pickle
 
 
 def get_qr_info(s):
@@ -102,6 +103,12 @@ def get_cookie(s, cookie_url_list):
         response = s.get(url, headers=headers)
         print(response.text)
 
+
+def save_session(s):
+    with open('session.pickle', 'wb') as f:
+        pickle.dump(s, f)
+
+
 def login_session():
     s = requests.Session()
     qr_info = get_qr_info(s)
@@ -113,5 +120,4 @@ def login_session():
     cookie_text = get_cookie_text(s, login_token)
     cookie_url_list = get_cookie_url(cookie_text)
     get_cookie(s, cookie_url_list)
-
-    return s
+    save_session(s)
