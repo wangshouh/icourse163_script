@@ -12,6 +12,9 @@ from qr_login import login_session
 
 
 def like(s, pid):
+    '''`
+    进行点赞操作
+    '''
     url = "https://www.icourse163.org/dwr/call/plaincall/MocForumBean.markVote.dwr"
     headers = {
         'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:98.0) Gecko/20100101 Firefox/98.0'
@@ -24,6 +27,9 @@ def like(s, pid):
 
 
 def send_comment(s, pid, comment):
+    '''
+    发送经过url编码的评论
+    '''
     url = "https://www.icourse163.org/dwr/call/plaincall/MocForumBean.addReply.dwr"
     headers = {
         'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:98.0) Gecko/20100101 Firefox/98.0'
@@ -35,12 +41,18 @@ def send_comment(s, pid, comment):
 
 
 def get_comment_decode(comments_list):
+    '''
+    从评论列表中随机选取一条评论,并进行url编码
+    '''
     comment = random.choice(comments_list)
     comment_decode = urllib.parse.quote(comment)
     return comment_decode
 
 
 def get_sessions():
+    '''
+    获取session
+    '''
     if os.path.exists('session.pickle'):
         with open('session.pickle', 'rb') as f:
             s = pickle.load(f)
@@ -58,5 +70,6 @@ def main():
         like(s, pid)
         comment_decode = get_comment_decode(comments_list)
         send_comment(s, pid, comment_decode)
-    
+
+
 main()

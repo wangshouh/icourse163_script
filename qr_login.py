@@ -6,6 +6,9 @@ import pickle
 
 
 def get_qr_info(s):
+    '''
+    获取二维码url和pollkey
+    '''
     url = "https://www.icourse163.org/logonByQRCode/code.do?width=182&height=182"
 
     payload = {}
@@ -21,6 +24,9 @@ def get_qr_info(s):
 
 
 def get_qr_img(qr_url):
+    '''
+    获取二维码图片并保存
+    '''
     url = qr_url
 
     payload = {}
@@ -35,6 +41,9 @@ def get_qr_img(qr_url):
 
 
 def get_qr_result(s, pollkey):
+    '''.
+    获取二维码结果
+    '''
     url = f"https://www.icourse163.org/logonByQRCode/poll.do?pollKey={pollkey}"
 
     headers = {
@@ -49,6 +58,10 @@ def get_qr_result(s, pollkey):
 
 
 def scan_qr_code(s, pollkey):
+    '''
+    根据不同结果给出不同终端提示
+    如果成功后则提取token并返回
+    '''
     while True:
         time.sleep(1)
         result = get_qr_result(s, pollkey)
@@ -71,7 +84,9 @@ def scan_qr_code(s, pollkey):
 
 
 def get_cookie_text(s, login_token):
-
+    '''
+    中国大学MOOC存在一个cookies跳转页面,该页面url见下
+    '''
     url = f"https://www.icourse163.org/passport/logingate/mocMobChangeCookie.htm?token={login_token}&returnUrl="
 
     headers = {
@@ -85,12 +100,19 @@ def get_cookie_text(s, login_token):
 
 
 def get_cookie_url(cookie_text):
+    '''
+    接上述函数的返回值,跳转页面中的link标签内存在cookie url
+    点击后即可获取cookie
+    '''
     cookie_url_list = re.findall(r'href="(.*?)"', cookie_text)
 
     return cookie_url_list
 
 
 def get_cookie(s, cookie_url_list):
+    '''
+    通过访问cookies url获取cookie
+    '''
     for cookie_url in cookie_url_list:
         url = cookie_url
 
@@ -103,6 +125,9 @@ def get_cookie(s, cookie_url_list):
 
 
 def save_session(s):
+    '''
+    保存session
+    '''
     with open('session.pickle', 'wb') as f:
         pickle.dump(s, f)
 
