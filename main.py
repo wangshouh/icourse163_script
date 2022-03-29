@@ -40,6 +40,14 @@ def get_comment_decode(comments_list):
     return comment_decode
 
 
+def get_sessions():
+    if os.path.exists('session.pickle'):
+        with open('session.pickle', 'r') as f:
+            session = pickle.load(f)
+    else:
+        session = login_session()
+
+
 def main(s, pid):
     comments_list = get_comments_list(pid)
     like(pid)
