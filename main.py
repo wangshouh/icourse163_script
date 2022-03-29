@@ -24,3 +24,9 @@ def get_comment_decode(comments_list):
     comment = random.choice(comments_list)
     comment_decode = urllib.parse.quote(comment)
     return comment_decode
+
+def main(s, pid):
+    comments_list = get_comments_list(pid)
+    like(pid)
+    comment_decode = get_comment_decode(comments_list)
+    send_comment(pid, comment_decode)
