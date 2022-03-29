@@ -52,7 +52,9 @@ def get_sessions():
 
 def main(pid):
     s = get_sessions()
-    comments_list = get_comments_list(s, pid)
-    like(s, pid)
-    comment_decode = get_comment_decode(comments_list)
-    send_comment(pid, comment_decode)
+    while True:
+        pid = input('输入pid:')
+        comments_list = get_comments_list(s, pid)
+        like(s, pid)
+        comment_decode = get_comment_decode(comments_list)
+        send_comment(pid, comment_decode)
