@@ -67,3 +67,21 @@ def scan_qr_code(s, pollkey):
             print(result)
 
     return login_token
+
+
+def get_cookie_text(s, login_token):
+
+    url = f"https://www.icourse163.org/passport/logingate/mocMobChangeCookie.htm?token={login_token}&returnUrl="
+
+    headers = {
+        'Host': 'www.icourse163.org',
+        'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:98.0) Gecko/20100101 Firefox/98.0',
+    }
+
+    response = s.get(url, headers=headers)
+    with open('example.html', 'w') as f:
+        f.write(response.text)
+
+    return response.text
+
+
