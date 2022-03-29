@@ -80,8 +80,6 @@ def get_cookie_text(s, login_token):
     }
 
     response = s.get(url, headers=headers)
-    with open('example.html', 'w') as f:
-        f.write(response.text)
 
     return response.text
 
