@@ -42,7 +42,7 @@ def get_comment_decode(comments_list):
 
 def get_sessions():
     if os.path.exists('session.pickle'):
-        with open('session.pickle', 'r') as f:
+        with open('session.pickle', 'rb') as f:
             s = pickle.load(f)
     else:
         s = login_session()
@@ -52,7 +52,7 @@ def get_sessions():
 
 def main(pid):
     s = get_sessions()
-    comments_list = get_comments_list(pid)
-    like(pid)
+    comments_list = get_comments_list(s, pid)
+    like(s, pid)
     comment_decode = get_comment_decode(comments_list)
     send_comment(pid, comment_decode)
